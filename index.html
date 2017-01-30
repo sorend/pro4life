@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+  <!-- /              /       |      /           -->
+  <!-- (___  ___  ___ (     ___| ___ (___  ___   -->
+  <!-- |   )|   )|   )|___)|   )|   )|    |   )  -->
+  <!-- |__/ |__/||  / | \  |__/ |__/||__  |__/|  -->
+  <!-- tiny interface for PRO registrations, SAD -->
+  <head>
+  <title>PRO 4 L!F3</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/store.js/1.3.20/store.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.16/clipboard.min.js"></script>
+  <style>/* this is lotus: http://goatslacker.github.io/lotus.css/ */
+   /*!LOTUS*/@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,700,300,400|Inconsolata);html{-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}details,main,summary{display:block}[hidden],template{display:none}a{background-color:transparent}a:active,a:hover{outline:0}img{border:0}hr{box-sizing:content-box;height:0}pre{overflow:auto}code,kbd,pre,samp{font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}input{line-height:normal}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="search"]{-webkit-appearance:textfield;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:none;padding:0;margin:0 2px}legend{border:0;padding:0}textarea{overflow:auto}optgroup{font-weight:700}body{background-color:#f0f0f0;color:#353535;font-family:'OpenSans',sans-serif;font-size:1em;line-height:1.5em}code,pre,kbd,samp{font-family:'Inconsolata',monospace}h1,h2,h3,h4,h5,h6{line-height:1.5em;margin:0 0 .5em}h1,.h1{font-size:2em}h2,.h2{font-size:1.5em}h3,.h3{font-size:1.3em}h4,.h4{font-size:1.15em}h5,.h5{font-size:1em}h6,.h6{font-size:.75em;text-transform:uppercase}p{margin:0 0 1em}blockquote{border-left:.1em solid #e2e5e9;margin:1.5em 0;padding:0 1.25em 0 1.24em}hr{border-color:#e2e5e9;border-style:solid;border-width:.1em;margin:2em 0}ol ol li{list-style-type:lower-alpha}ol ol ol li{list-style-type:lower-roman}b,strong{font-weight:700}small{font-size:.8em;line-height:1.2em}sub,sup{font-size:.6em;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}.row{margin-left:-1.25em}.col,.col-sm,.col-lg{background-clip:content-box;box-sizing:border-box;display:inline-block;margin-right:-.25em;min-height:1px;padding-left:1.25em;position:relative;vertical-align:top}.no-gutter{padding-left:.25em}.c12{width:100%}.c11{width:91.66%}.c10{width:83.33%}.c9{width:75%}.c8{width:66.66%}.c7{width:58.33%}.c6{width:50%}.c5{width:41.66%}.c4{width:33.33%}.c3{width:25%}.c2{width:16.66%}.c1{width:8.33%}@media (max-width:55em){.col-lg{width:100%;margin-bottom:1.25em}}@media (max-width:30em){.col{width:100%;margin-bottom:1.25em}}.btn{background-color:#a8b2bd;border:0;border-radius:.25em;cursor:pointer;display:inline-block;padding:.5em 1.5em;outline:0;text-align:center}.btn-sm{padding:.25em .75em}.btn-lg{padding:1em 3em}label{margin-bottom:.5em}label,label textarea,label input,label select{display:block}textarea,input,select{border:.1em solid #e2e5e9;padding:.5em}textarea:focus,input:focus,select:focus{border-color:#70bde6}textarea,input{outline:0;width:13em}select{height:2.25em;width:14em}input[type=checkbox],input[type=radio]{display:inline-block;width:auto}input[disabled]{color:#e2e5e9}.form-addon{background-color:#fff;border:.1em solid #e2e5e9;padding:.5em 1em}.bg-dark-gray{background-color:#a8b2bd}.bg-light-gray{background-color:#e2e5e9}.bg-red{background-color:#ff7772}.bg-green{background-color:#67ba72}.bg-blue{background-color:#70bde6}.bg-yellow{background-color:#ffdd69}.bg-magenta{background-color:#bf75ff}.bg-cyan{background-color:#92f9f6}.bg-black{background-color:#353535}.txt-dark-gray{color:#a8b2bd}.txt-light-gray{color:#e2e5e9}.txt-red{color:#ff7772}.txt-green{color:#67ba72}.txt-blue{color:#70bde6}.txt-yellow{color:#ffdd69}.txt-magenta{color:#bf75ff}.txt-cyan{color:#92f9f6}.sp-sm{padding:1em}.sp-vert-sm{padding-bottom:1em;padding-top:1em}.sp-horiz-sm{padding-left:1em;padding-right:1em}.sp-md{padding:2em}.sp-vert-md{padding-bottom:2em;padding-top:2em}.sp-horiz-md{padding-left:2em;padding-right:2em}.sp-lg{padding:3em}.sp-vert-lg{padding-bottom:3em;padding-top:3em}.sp-horiz-lg{padding-left:3em;padding-right:3em}@media (max-width:30em){.sp-sm{padding:.5em}.sp-vert-sm{padding-bottom:.5em;padding-top:.5em}.sp-horiz-sm{padding-left:.5em;padding-right:.5em}.sp-md{padding:1em}.sp-vert-md{padding-bottom:1em;padding-top:1em}.sp-horiz-md{padding-left:1em;padding-right:1em}.sp-lg{padding:1.5em}.sp-vert-lg{padding-bottom:1.5em;padding-top:1.5em}.sp-horiz-lg{padding-left:1.5em;padding-right:1.5em}}
+   /* own css */
+   pre { font-family: "Courier New", Courier, monospace; }
+  </style>
+  </head>
+  <body>
+    <section class="sp-horiz-lg" id="proApp">
+      <div class="row" >
+        <div class="col c11">
+          <button class="btn btn-sm" style="margin: 0.5em;" v-for="label in labels"><input type="checkbox" v-model="selectedLabels" v-bind:value="label">{{ label }}</button>
+        </div>
+        <div class="col c1" >
+          <button class="btn btn-sm bg-red"  style="margin: 0.5em;" @click.prevent="resetWeek();">Reset</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col c2">Project</div>
+        <div class="col c2">Monday</div>
+        <div class="col c2">Tuesday</div>
+        <div class="col c2">Wednesday</div>
+        <div class="col c2">Thursday</div>
+        <div class="col c2">Friday</div>
+      </div>
+      <hr style="padding: 0; margin: 0.5em 0;">
+      <div class="row" v-for="(project, index) in filteredProjects" draggable="true" @drag="startDrag(index)" @drop.prevent="stopDrag(index)" @dragover.prevent="">
+        <div class="col c2 sp-vert-sm">
+          {{ project.text }} <button @click="remove(index)">x</button>
+        </div>
+        <div class="col c2" v-for="(hour, idx) in project.hours">
+          <button @mousedown="clickStart(project, idx)" @mouseup="clickDone(project, idx)" class="btn btn-lg" style="width:100%;">{{ hour }}</button>
+        </div>
+      </div>
+      <div class="row" v-show="projects.length > 0">
+        <div class="col c2">
+          Daily totals
+        </div>
+        <div class="col c2" v-for="(daily, index) in dailyHours">
+          <button class="btn btn-sm bg-green btn-clip" data-clipboard-target="#exportVal" style="width: 100%;" @click="exportDay(index);">{{ daily }}</button>
+        </div>
+      </div>
+      <div v-show="exported">
+        <hr>
+        <h4>Paste in PRO</h4>
+        <pre id="exportVal" style="width: 100%; border:1px #000 dashed; padding: 3px;">{{ exported }}</pre>
+      </div>
+      <hr>
+      <h4>Add new PRO project</h4>
+      <div class="row sp-vert-sm">
+        <div class="col c12">
+          <input v-model.trim="text" placeholder="Description" tabindex="1"/>
+          <input v-model.trim="no" placeholder="Pro No" style="width: 8em;" tabindex="2"/>
+          <input v-model.trim="akt" placeholder="Pro Akt." style="width: 4em;" tabindex="3"/>
+          <input v-model.trim="label" placeholder="Label" style="width: 8em;" tabindex="4"/>
+          <button class="btn btn-sm" @click="add()" tabindex="5">Add</button>
+        </div>
+      </div>
+      <div class="row sp-vert-sm">
+        <div class="col c12">
+          <input id="exportedProjects" v-model.trim="importedProjects" placeholder="Paste exported projects" tabindex="6"/>
+          <button class="btn btn-sm" @click="importProjects()" tabindex="7">Import</button>
+          <button class="btn btn-sm bg-yellow btn-clip" data-clipboard-target="#exportedProjects" @click="exportProjects()">Export</button>
+        </div>
+      </div>
+      <h3>Documentation</h3>
+      <p>
+        Based on TIN's idea of lightweight PRO integration - that you can log entries in a web-interface paste them exported lines into PRO/3270. In this version, projects and hours are logged in the browser's localStorage. You can filter projects on labels in case you have a lot.
+      </p>
+      <h4>Usage</h4>
+      <p>
+        <ol>
+          <li>Use the section "Add a new PRO project" to add a new project</li>
+          <li>Click on the box for the selected day/project to increase 0.5 hours.</li>
+          <li>Long-click (1/2 sec) on the box for the selected day/project to decrease 0.5 hours.</li>
+          <li>Click on "X" besides the project description to remove the project (you can only remove projects without hours logged).</li>
+          <li>Drag projects up and down to change the ordering.</li>
+          <li>Tick the labels on top to filter projects.</li>
+          <li>Click on the green button to get an export for the day.</li>
+          <li>(The export is automatically copied to your clip-board)</li>
+          <li>Paste the export into the PRO screen in 3270.</li>
+          <li>Click "Reset" when the week is over and you have registered in PRO.</li>
+          <li>You can save this file (index.html) to your system and run locally.</li>
+          <li>You can use the "Import" and "Export" buttons to move configuration between systems.</li>
+        </ol>
+      </p>
+    </section>
+    <script>
+     var STORE_KEY = 'pro4life-v1/';
+     var store = {
+       fetch: function(s, d) {
+         return JSON.parse(localStorage.getItem(STORE_KEY + s) || d);
+       },
+       save: function(s, obj) {
+         localStorage.setItem(STORE_KEY + s, JSON.stringify(obj));
+       },
+     };
+
+     var updateFunc = function(day, delta) {
+       return function(x, idx) {
+         if (idx == day) return Math.max(0, x + delta);
+         else return x;
+       };
+     };
+
+     new Clipboard(".btn-clip"); // handle clips
+
+     var pressTimer = null;
+     var app = new Vue({
+       el: "#proApp",
+       data: {
+         projects: store.fetch("projects", "[]"),  // initial load
+         text: '', // for add
+         no: '',
+         akt: '',
+         label: '',
+         selectedLabels: store.fetch("selectedLabels", "[]"),
+         exported: '',
+         importedProjects: '',
+       },
+       dragging: null,
+       watch: {  // persist when updated
+         projects: {
+           handler: function(projects) {
+             store.save("projects", projects);
+           },
+           deep: true,
+         },
+         selectedLabels: {
+           handler: function(selectedLabels) {
+             store.save("selectedLabels", selectedLabels);
+           }
+         },
+       },
+       computed: {
+         labels: function() {
+           var set = new Set();
+           this.projects.forEach(function(p) { if (p.label) set.add(p.label); });
+           return Array.from(set);
+         },
+         filteredProjects: function() {
+           var l = this.selectedLabels;
+           if (l.length > 0)
+             return this.projects.filter(function(x) {
+               return l.indexOf(x.label) > -1;
+             });
+           else
+             return this.projects;
+         },
+         dailyHours: function() {
+           var totals = [0, 0, 0, 0, 0];
+           this.projects.forEach(function(p) {
+             for (var i = 0; i < p.hours.length; i++)
+               totals[i] += p.hours[i];
+           });
+           return totals;
+         }
+       },
+       methods: {
+         clickStart: function(project, day) {
+           pressTimer = window.setTimeout(function() {
+             project.hours = project.hours.map(updateFunc(day, -0.5));
+             pressTimer = null;
+           }, 500);
+           return false;
+         },
+         clickDone: function(project, day) {
+           if (pressTimer != null) {
+             clearTimeout(pressTimer);
+             project.hours = project.hours.map(updateFunc(day, 0.5));
+           }
+           return false;
+         },
+         add: function() {
+           var text = this.text && this.text.trim();
+           var no = this.no && parseInt(this.no.trim());
+           var akt = this.akt && parseInt(this.akt.trim());
+           var label = this.label && this.label.trim();
+           if (!(text && no))
+             return;
+           this.projects.push({ text: text, no: no, akt: akt, label: label, hours: [0, 0, 0, 0, 0] });
+         },
+         resetWeek: function() {
+           this.projects = this.projects.map(function(p) { p.hours = [0, 0, 0, 0, 0]; return p; });
+         },
+         remove: function(index) {
+           var projectHours = this.projects[index].hours.reduce(function(a, b){ return a+b; }, 0);
+           if (projectHours > 0) {
+             console.log("You have " + projectHours + "hrs on this project, not deleting.");
+             return;
+           }
+           this.projects = this.projects.filter(function(item, idx) {return idx != index;});
+         },
+         exportDay: function(index) {
+           var numberFix = function(x) { return x.toFixed(1).replace(".", ","); };
+           var leftAlign = function(x, i) { x = "" + x; while (x.length < i) x = x + " "; return x; };
+           var nonZero = this.projects.filter(function(p){ return p.hours[index] > 0; });
+           var lines = nonZero.map(function(p) {
+             return leftAlign(p.no, 8) + leftAlign(p.akt || "0", 5) +
+                    leftAlign(numberFix(p.hours[index]), 5) +
+                    leftAlign("0,0", 5) + leftAlign(p.text, 0);
+           });
+           this.exported = lines.join("\n");
+         },
+         startDrag: function(index) {
+           this.dragging = index;
+           if (this.pressTimer != null) clearTimeout(this.pressTimer);
+         },
+         stopDrag: function(newIndex) {
+           if (this.dragging == null || this.dragging == newIndex)
+             return;
+           var oldIndex = this.dragging;
+           this.dragging = null;
+           var oldProject = this.projects[oldIndex];
+           this.projects.splice(oldIndex, 1);
+           this.projects.splice(newIndex, 0, oldProject);
+         },
+         importProjects: function() {
+           var projects = JSON.parse(this.importedProjects);
+           if (projects && projects.length > 0)
+             this.projects = projects;
+         },
+         exportProjects: function() {
+           this.importedProjects = JSON.stringify(this.projects);
+         },
+       },
+     });
+    </script>
+  </body>
+</html>
