@@ -50,6 +50,11 @@
           <button class="btn btn-sm bg-green btn-clip" data-clipboard-target="#exportVal" style="width: 100%;" @click="exportDay(index);">{{ daily }}</button>
         </div>
       </div>
+      <div class="row" >
+        <div class="col c12">
+          <button class="btn btn-sm" style="margin: 0.5em;"><input type="checkbox" v-model="selectedOvertime">Calculate overtime</button>
+        </div>
+      </div>
       <div v-show="exported">
         <hr>
         <h4>Paste in PRO</h4>
@@ -127,6 +132,7 @@
          selectedLabels: store.fetch("selectedLabels", "[]"),
          exported: '',
          importedProjects: '',
+         selectedOvertime: false,
        },
        dragging: null,
        watch: {  // persist when updated
@@ -136,11 +142,11 @@
            },
            deep: true,
          },
-         selectedLabels: {
-           handler: function(selectedLabels) {
-             store.save("selectedLabels", selectedLabels);
-           }
-         },
+                 selectedLabels: {
+                   handler: function(selectedLabels) {
+                     store.save("selectedLabels", selectedLabels);
+                   }
+                 },
        },
        computed: {
          labels: function() {
@@ -202,13 +208,19 @@
            this.projects = this.projects.filter(function(item, idx) {return idx != index;});
          },
          exportDay: function(index) {
+           var self = this;
            var numberFix = function(x) { return x.toFixed(1).replace(".", ","); };
            var leftAlign = function(x, i) { x = "" + x; while (x.length < i) x = x + " "; return x; };
            var nonZero = this.projects.filter(function(p){ return p.hours[index] > 0; });
+           var totalDayHours = nonZero.reduce(function(a, b) { return a.hours[index] + b.hours[index]; });
+           var overtimeHours = Math.max(0, totalDayHours - 7.5);
            var lines = nonZero.map(function(p) {
+             var oHours = self.selectedOvertime ? Math.min(overtimeHours, p.hours[index]) : 0;
+             var nHours = p.hours[index] - oHours;
+             overtimeHours -= oHours;
              return leftAlign(p.no, 8) + leftAlign(p.akt || "0", 5) +
-                    leftAlign(numberFix(p.hours[index]), 5) +
-                    leftAlign("0,0", 5) + leftAlign(p.text, 0);
+                    leftAlign(numberFix(nHours), 5) +
+                    leftAlign(numberFix(oHours), 5) + leftAlign(p.text, 0);
            });
            this.exported = lines.join("\n");
          },
