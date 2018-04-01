@@ -36,7 +36,7 @@
       <hr style="padding: 0; margin: 0.5em 0;">
       <div class="row" v-for="(project, index) in filteredProjects" draggable="true" @drag="startDrag(index)" @drop.prevent="stopDrag(index)" @dragover.prevent="">
         <div class="col c2 sp-vert-sm">
-          {{ project.text }} <button @click="remove(index)">x</button>
+          {{ project.text }} <a href="#" @click="remove(index)">x</a>
         </div>
         <div class="col c2" v-for="(hour, idx) in project.hours">
           <button @mousedown="clickStart(project, idx)" @mouseup="clickDone(project, idx)" class="btn btn-lg" style="width:100%;">{{ hour }}</button>
@@ -48,11 +48,6 @@
         </div>
         <div class="col c2" v-for="(daily, index) in dailyHours">
           <button class="btn btn-sm bg-green btn-clip" data-clipboard-target="#exportVal" style="width: 100%;" @click="exportDay(index);">{{ daily }}</button>
-        </div>
-      </div>
-      <div class="row" >
-        <div class="col c12">
-          <button class="btn btn-sm" style="margin: 0.5em;"><input type="checkbox" v-model="selectedOvertime">Calculate overtime</button>
         </div>
       </div>
       <div v-show="exported">
@@ -68,6 +63,7 @@
           <input v-model.trim="no" placeholder="Pro No" style="width: 8em;" tabindex="2"/>
           <input v-model.trim="akt" placeholder="Pro Akt." style="width: 4em;" tabindex="3"/>
           <input v-model.trim="label" placeholder="Label" style="width: 8em;" tabindex="4"/>
+          <span><input type="checkbox" v-model="overtime"/> Overtime</span>
           <button class="btn btn-sm" @click="add()" tabindex="5">Add</button>
         </div>
       </div>
@@ -129,10 +125,10 @@
          no: '',
          akt: '',
          label: '',
+         overtime: false,
          selectedLabels: store.fetch("selectedLabels", "[]"),
          exported: '',
          importedProjects: '',
-         selectedOvertime: false,
        },
        dragging: null,
        watch: {  // persist when updated
@@ -192,9 +188,10 @@
            var no = this.no && parseInt(this.no.trim());
            var akt = this.akt && parseInt(this.akt.trim());
            var label = this.label && this.label.trim();
+           var overtime = this.overtime;
            if (!(text && no))
              return;
-           this.projects.push({ text: text, no: no, akt: akt, label: label, hours: [0, 0, 0, 0, 0] });
+           this.projects.push({ text: text, no: no, akt: akt, label: label, hours: [0, 0, 0, 0, 0], overtime: overtime });
          },
          resetHours: function() {
            this.projects = this.projects.map(function(p) { p.hours = [0, 0, 0, 0, 0]; return p; });
@@ -212,12 +209,9 @@
            var numberFix = function(x) { return x.toFixed(1).replace(".", ","); };
            var leftAlign = function(x, i) { x = "" + x; while (x.length < i) x = x + " "; return x; };
            var nonZero = this.projects.filter(function(p){ return p.hours[index] > 0; });
-           var totalDayHours = nonZero.reduce(function(a, b) { return a.hours[index] + b.hours[index]; });
-           var overtimeHours = Math.max(0, totalDayHours - 7.5);
            var lines = nonZero.map(function(p) {
-             var oHours = self.selectedOvertime ? Math.min(overtimeHours, p.hours[index]) : 0;
-             var nHours = p.hours[index] - oHours;
-             overtimeHours -= oHours;
+             var oHours = p.overtime ? p.hours[index] : 0;
+             var nHours = !p.overtime ? p.hours[index] : 0;
              return leftAlign(p.no, 8) + leftAlign(p.akt || "0", 5) +
                     leftAlign(numberFix(nHours), 5) +
                     leftAlign(numberFix(oHours), 5) + leftAlign(p.text, 0);
